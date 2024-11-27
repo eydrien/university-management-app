@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Asignaturas por Profesor</title>
+    <link rel="stylesheet" href="./css/styleprofesor.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gestión de Asignaturas por Profesor</h1>
+
+        <!-- Consultar por Profesor -->
+        <div class="search-section">
+            <label for="search-professor">Consultar Asignaturas por Profesor:</label>
+            <input type="text" id="search-professor" placeholder="Ingrese ID del Profesor">
+            <button onclick="consultByProfessor()">Consultar</button>
+        </div>
+
+        <!-- Consultar por Asignatura -->
+        <div class="search-section">
+            <label for="search-subject">Consultar Profesores por Asignatura:</label>
+            <input type="text" id="search-subject" placeholder="Ingrese ID de la Asignatura">
+            <button onclick="consultBySubject()">Consultar</button>
+        </div>
+
+        <!-- Resultados de consulta -->
+        <div id="results"></div>
+
+        <!-- Formulario para actualizar o eliminar -->
+        <div class="form-section">
+            <h2>Actualizar o Eliminar Asignatura</h2>
+            <label for="update-id">ID Profesor:</label>
+            <input type="text" id="update-id" placeholder="ID Profesor">
+            
+            <label for="update-group">Número de Grupo:</label>
+            <input type="number" id="update-group" placeholder="Nuevo Número de Grupo">
+            
+            <label for="update-schedule">Nuevo Horario:</label>
+            <input type="text" id="update-schedule" placeholder="Nuevo Horario">
+            
+            <button onclick="updateData()">Actualizar</button>
+            <button onclick="deleteData()">Eliminar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

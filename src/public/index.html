@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD de Estudiantes</title>
+  <link rel="stylesheet" href="./css/style1.css">
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="index.html">Estudiantes</a></li>
+          <li><a href="./asignaturas.html">Asignaturas</a></li>
+        </ul>
+      </nav>
+
+
+  <div class="container">
+    <h1>Gestión de Estudiantes</h1>
+
+    
+    <form id="formEstudiante">
+      <input type="hidden" id="cod_e" />
+      <label for="nom_e">Nombre:</label>
+      <input type="text" id="nom_e" placeholder="Nombre del estudiante" required />
+      
+      <label for="dir_e">Dirección:</label>
+      <input type="text" id="dir_e" placeholder="Dirección" required />
+      
+      <label for="tel_e">Teléfono:</label>
+      <input type="text" id="tel_e" placeholder="Teléfono" required />
+
+      <label for="fech_nac">Fecha de Nacimiento:</label>
+      <input type="date" id="fech_nac" required />
+
+      <button type="submit">Guardar</button>
+    </form>
+
+    
+    <table id="tablaEstudiantes">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+      </tbody>
+    </table>
+  </div>
+  <script src="./script/app.js"></script>
+</body>
+</html>
+
+
