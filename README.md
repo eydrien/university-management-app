@@ -8,8 +8,8 @@ Este es un proyecto para la gestión de estudiantes, asignaturas y profesores en
 
 - **Backend:** Node.js, Express y TypeScript. 🖥️
 - **Frontend:** HTML, CSS y JavaScript. 🌐
-- **API REST:** Soporta métodos HTTP (GET, POST, PUT, DELETE). 🔄
-- **Persistencia de Datos:** Base de datos para almacenar la información. 💾
+- **API REST:** Soporta métodos HTTP ( **GET**,  **POST**,  **PUT**, DELETE). 🔄
+- **Persistencia de Datos:** Base de datos para almacenar l **a info**rmación. 💾
 
 ---
 
@@ -49,25 +49,25 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 ---
 ## **🌍 Acceso a la API 💡**
 
-    La API está configurada para interactuar con los siguientes métodos HTTP:
+ La API está configurada para interactuar con los siguientes métodos HTTP:
 
-    **PROFESORES**
-    GET /profesor: Obtener lista de profesores.
-    POST /profesor: Crear un nuevo profesor.
-    PUT /profesor/:cod_e: Actualizar un profesor por su ID.
-    DELETE /profesor/:cod_e: Eliminar un profesor por su ID.
+ **PROFESORES**
+    - **GET** /profesor: Obtener lista de profesores.
+    - **POST** /profesor: Crear un nuevo profesor.
+    - **PUT** /profesor/:cod_e: Actualizar un profesor por su ID.
+    - **DELETE** /profesor/:cod_e: Eliminar un profesor por su ID.   
 
-    **ESTUDIANTES**
-    GET /estrudiante: Obtener lista de estudiantes.
-    POST /estrudiante: Crear un nuevo estudiante.
-    PUT /estrudiante/:cod_e: Actualizar un estudiante por su ID.
-    DELETE /estrudiante/:cod_e: Eliminar un estudiante por su ID.
+**ESTUDIANTES**
+    - **GET** /estrudiante: Obtener lista de estudiantes.
+    - **POST** /estrudiante: Crear un nuevo estudiante.
+    - **PUT** /estrudiante/:cod_e: Actualizar un estudiante por su ID.
+    - **DELETE** /estrudiante/:cod_e: Eliminar un estudiante por su ID.
 
-    **ASIGNATURAS**
-    GET /asignatura: Obtener lista de asignaturas.
-    POST /asignatura: Crear una nueva asignatura.
-    PUT /asignatura/:cod_e: Actualizar una asignatura por su ID.
-    DELETE /asignatura/:cod_e: Eliminar una asignatura por su ID.
+**ASIGNATURAS**
+    - **GET** /asignatura: Obtener lista de asignaturas.
+    - **POST** /asignatura: Crear una nueva asignatura.
+    - **PUT** /asignatura/:cod_e: Actualizar una asignatura por su ID.
+    - **DELETE** /asignatura/:cod_e: Eliminar una asignatura por su ID.
 
 ---
 
@@ -76,7 +76,7 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
     Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
 
 --
-🌐 Grupo de trabajo 📱
-1. Lorena
-2. Joynner
-3. Adrian 
+## **🌐 Grupo de trabajo 📱**
+    1. Lorena
+    2. Joynner
+    3. Adrian 
