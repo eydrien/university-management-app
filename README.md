@@ -33,8 +33,9 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
 
 2. **Instala las dependencias**
    ```bash
-    npm install
-
+    npm install express nodemon body-parser mysql2 dotenv cors
+    npm install --save-dev ts-node nodemon
+    npm install typescript --save-dev
 3. **Configura el entorno de desarrollo**
     ```bash
     #Crea un archivo .env en la raíz del proyecto con las variables necesarias (por ejemplo, conexión a la base de datos, puertos, etc.)
