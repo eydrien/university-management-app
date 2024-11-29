@@ -18,9 +18,9 @@
   <div class="container">
     <h1>Gestión de Estudiantes</h1>
 
-    
     <form id="formEstudiante">
-      <input type="hidden" id="cod_e" />
+      <label for="nom_e">Código:</label>
+      <input type="text" id="cod_e" name="cod_e" placeholder="Código del estudiante" required>
       <label for="nom_e">Nombre:</label>
       <input type="text" id="nom_e" placeholder="Nombre del estudiante" required />
       
@@ -53,7 +53,33 @@
       </tbody>
     </table>
   </div>
-  <script src="./script/app.js"></script>
+
+
+  <script>
+    document.getElementById('formEstudiante').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const estudiante = {
+            cod_e: document.getElementById('cod_e').value,
+            nom_e: document.getElementById('nom_e').value,
+            dir_e: document.getElementById('dir_e').value,
+            tel_e: document.getElementById('tel_e').value,
+            fech_nac: document.getElementById('fech_nac').value
+        };
+
+        fetch('http://localhost:3000/estudiante', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(estudiante),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
+    });
+</script>
+  <!-- <script src="./script/app.js"></script> -->
 </body>
 </html>
 

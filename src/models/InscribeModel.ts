@@ -1,4 +1,4 @@
-export interface Imparte{
+export interface Inscribe{
     cod_e:number;
     cod_a:number;
     id_p: number;

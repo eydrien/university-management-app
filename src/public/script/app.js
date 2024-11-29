@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:3000/estudiante';
+const API_URL = `http://${process.env.HOST}:${process.env.PORT}`;
 
 // Función para obtener estudiantes del servidor
 async function obtenerEstudiantes() {
@@ -11,17 +11,17 @@ async function obtenerEstudiantes() {
 // Función para renderizar la tabla
 function renderTabla(estudiantes, tablaEstudiantes) {
   tablaEstudiantes.innerHTML = '';
-  estudiantes.forEach((estudiante, index) => {
+  estudiantes.forEach((estudiante, cod_e) => {
     const fila = document.createElement('tr');
     fila.innerHTML = `
-      <td>${index + 1}</td>
+      <td>${estudiante.cod_e}</td>
       <td>${estudiante.nom_e}</td>
       <td>${estudiante.dir_e}</td>
       <td>${estudiante.tel_e}</td>
       <td>${estudiante.fech_nac}</td>
       <td>
-        <button onclick="editarEstudiante(${index})">Editar</button>
-        <button class="delete" onclick="eliminarEstudiante(${index})">Eliminar</button>
+        <button onclick="editarEstudiante(${cod_e})">Editar</button>
+        <button class="delete" onclick="eliminarEstudiante(${cod_e})">Eliminar</button>
       </td>
     `;
     tablaEstudiantes.appendChild(fila);
@@ -37,7 +37,7 @@ document.getElementById('formEstudiante').addEventListener('submit', async (e) =
   const tel_e = document.getElementById('tel_e').value;
   const fech_nac = document.getElementById('fech_nac').value;
 
-  const estudiante = { nom_e, dir_e, tel_e, fech_nac };
+  const estudiante = {cod_e, nom_e, dir_e, tel_e, fech_nac };
 
   if (cod_e) {
     // Actualizar estudiante
@@ -60,12 +60,12 @@ document.getElementById('formEstudiante').addEventListener('submit', async (e) =
 });
 
 // Función para editar un estudiante
-function editarEstudiante(index) {
+function editarEstudiante(cod_e) {
   fetch(API_URL)
     .then((res) => res.json())
     .then((data) => {
-      const estudiante = data[index];
-      document.getElementById('cod_e').value = index;
+      const estudiante = data[cod_e];
+      document.getElementById('cod_e').value = cod_e;
       document.getElementById('nom_e').value = estudiante.nom_e;
       document.getElementById('dir_e').value = estudiante.dir_e;
       document.getElementById('tel_e').value = estudiante.tel_e;
@@ -74,8 +74,8 @@ function editarEstudiante(index) {
 }
 
 // Función para eliminar un estudiante
-async function eliminarEstudiante(index) {
-  await fetch(`${API_URL}/${index}`, { method: 'DELETE' });
+async function eliminarEstudiante(cod_e) {
+  await fetch(`${API_URL}/${cod_e}`, { method: 'DELETE' });
   obtenerEstudiantes();
 }
 

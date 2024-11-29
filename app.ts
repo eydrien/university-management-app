@@ -14,7 +14,6 @@ dotenv.config();
 
 app.use(cors());
 app.use(bodyParser.json());
-
 app.get('/', ( req, res) => {
     
     res.type('text/plain');
