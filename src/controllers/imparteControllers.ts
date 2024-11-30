@@ -4,11 +4,11 @@ import { OkPacket, RowDataPacket } from 'mysql2';
 
 //create
 export const create = (imparte: Imparte, callback: Function) => {
-    const queryString = 'INSERT INTO Imparte (id_p, cod_a, grupo, horario) VALUES (?, ?, ?, ?)';
+    const queryString = 'INSERT INTO imparte (id_p, cod_a, grupo, horario) VALUES (?, ?, ?, ?)';
     
     db.query(
         queryString,
-        [imparte.id_p, imparte.cod_a],
+        [imparte.id_p, imparte.cod_a, imparte.grupo, imparte.horario],  
         (err) => {
             if (err) { callback(err); }
  
@@ -27,7 +27,7 @@ export const create = (imparte: Imparte, callback: Function) => {
 
 //read
 export const getAll = (callback: Function) => {
-    const queryString = 'SELECT * FROM Imparte WHERE id_p = ? AND cod_a = ?';
+    const queryString = 'SELECT * FROM imparte';
    
     db.query(queryString, (err, result) => {
         if (err) { callback(err); }
@@ -54,7 +54,7 @@ export const getAll = (callback: Function) => {
 
 
 export const update = (imparte: Imparte, callback: Function) => {
-    const queryString = 'UPDATE Imparte SET horario = ? WHERE id_p = ? AND cod_a = ?'; 
+    const queryString = 'UPDATE imparte SET horario = ? WHERE id_p = ? AND cod_a = ?'; 
  
     db.query(
         queryString,
@@ -75,7 +75,7 @@ export const update = (imparte: Imparte, callback: Function) => {
 
 
 export const remove = (id_p: number, callback: Function) => {
-    const queryString = 'DELETE FROM Imparte WHERE id_p = ? AND cod_a = ?';
+    const queryString = 'DELETE FROM imparte WHERE id_p = ? AND cod_a = ?';
  
     db.query(queryString, [id_p], (err) => {
         if (err) { callback(err); }
