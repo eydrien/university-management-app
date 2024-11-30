@@ -1,4 +1,4 @@
-/* styles.css */
+
 
 /* Body */
 body {
@@ -10,7 +10,7 @@ body {
 
 /* Navbar */
 nav {
-  background-color: #007bff; /* Color de fondo azul */
+  background-color: #007bff; 
   padding: 15px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -42,7 +42,7 @@ nav ul li a:hover {
   color: #fff;
 }
 
-/* Container for content */
+/* Container*/
 .container {
   max-width: 900px;
   margin: 20px auto;
@@ -59,15 +59,20 @@ h1 {
 }
 
 /* Form styles */
-form {
+form{
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
+form label {
+  width: 26%;
+  font-size: 16px;
+  font-weight: bold;
 
-form input,
-form button {
+}
+
+form input, form button {
   flex: 1 1 45%;
   padding: 10px;
   font-size: 16px;

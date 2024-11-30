@@ -1,5 +1,5 @@
 
-const API_URL = `http://${process.env.HOST}:${process.env.PORT}`;
+const API_URL = 'http://localhost:3000/estudiante';
 
 // Función para obtener estudiantes del servidor
 async function obtenerEstudiantes() {
@@ -11,7 +11,7 @@ async function obtenerEstudiantes() {
 // Función para renderizar la tabla
 function renderTabla(estudiantes, tablaEstudiantes) {
   tablaEstudiantes.innerHTML = '';
-  estudiantes.forEach((estudiante, cod_e) => {
+  estudiantes.forEach((_estudiantes, cod_e) => {
     const fila = document.createElement('tr');
     fila.innerHTML = `
       <td>${estudiante.cod_e}</td>

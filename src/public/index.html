@@ -19,7 +19,7 @@
     <h1>Gestión de Estudiantes</h1>
 
     <form id="formEstudiante">
-      <label for="nom_e">Código:</label>
+      <label for="cod_e">Código:</label>
       <input type="text" id="cod_e" name="cod_e" placeholder="Código del estudiante" required>
       <label for="nom_e">Nombre:</label>
       <input type="text" id="nom_e" placeholder="Nombre del estudiante" required />
@@ -55,7 +55,7 @@
   </div>
 
 
-  <script>
+ <!--  <script>
     document.getElementById('formEstudiante').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -74,12 +74,25 @@
             },
             body: JSON.stringify(estudiante),
         })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => console.error('Error:', error));
+        .then(response => {
+            if (response.ok) {
+                // Limpiar campos del formulario
+                document.getElementById('cod_e').value = '';
+                document.getElementById('nom_e').value = '';
+                document.getElementById('dir_e').value = '';
+                document.getElementById('tel_e').value = '';
+                document.getElementById('fech_nac').value = '';
+
+                // Mostrar mensaje de éxito
+                alert('Estudiante creado con éxito');
+            }
+            return response.json();
+        })
+        .then(data => console.log(data))
+        .catch((error) => console.error('Error:', error));
     });
-</script>
-  <!-- <script src="./script/app.js"></script> -->
+</script> -->
+  <script src="./script/estudiantes.js"></script>
 </body>
 </html>
 
