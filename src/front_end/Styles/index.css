@@ -1,0 +1,57 @@
+/* Estilos Generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6a4c93, #4caf50, #ffb74d);
+    color: #fff;
+    text-align: center;
+  }
+  
+  header {
+    background-color: #222;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 3rem;
+  }
+  
+  .slogan {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu ul li {
+    display: inline-block;
+    margin: 0 15px;
+  }
+  
+  .menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #222;
+    border-radius: 5px;
+  }
+  
+  .menu ul li a:hover {
+    background-color: #4caf50;
+  }
+  

@@ -5,6 +5,7 @@ import { estudianteRouter } from './src/routes/estudianteRoutes';
 import{ profesorRouter } from './src/routes/profesorRoutes';
 import { asignaturaRouter } from './src/routes/asignaturasRoutes';
 import { inscribeRouter} from './src/routes/inscribeRoutes';
+import { imparteRouter } from './src/routes/imparteRoutes';
 import { db } from './db';
 import cors from 'cors';
 
@@ -26,6 +27,7 @@ app.use('/estudiante', estudianteRouter);
 app.use('/profesor', profesorRouter);
 app.use('/asignatura', asignaturaRouter);
 app.use('/inscribe', inscribeRouter);
+app.use('/imparte', imparteRouter);
 
 
 
