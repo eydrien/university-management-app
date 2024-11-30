@@ -1,4 +1,4 @@
-/* Estilo base para la página */
+
 * {
     margin: 0;
     padding: 0;
@@ -115,10 +115,16 @@ table td {
     border: 1px solid #ccc;
 }
 
-table th {
-    background-color: #ecf0f1;
-    font-weight: bold;
+table td{
+    color: #2c3e50;
 }
+
+table th {
+    background-color: #07818a;
+    font-weight: bold;
+    text-align: center;
+}
+
 
 table td button {
     background-color: #e74c3c;
