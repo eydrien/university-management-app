@@ -32,7 +32,7 @@ document.getElementById('formProfesor').addEventListener('submit', function (eve
           document.getElementById('profesion').value = '';
 
           // Mostrar mensaje de éxito
-          alert('Estudiante creado con éxito');
+          alert('Profesor creado con éxito');
       }
       return response.json();
   })
