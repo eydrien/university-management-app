@@ -1,26 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Inscribe</title>
-    <link rel="stylesheet" href="../css/styleins.css">
+    <title>Registro de Notas - Inscribe</title>
+    <link rel="stylesheet" href="../css/inscribe.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Gestión de Inscribe</h1>
-        <form id="inscribeForm">
-            <label for="id_estudiante">ID Estudiante:</label>
-            <input type="number" id="id_estudiante" name="id_estudiante" required>
-            <label for="id_asignatura_inscribe">ID Asignatura:</label>
-            <input type="number" id="id_asignatura_inscribe" name="id_asignatura_inscribe" required>
-            <input type="submit" value="Registrar">
+        <h1>Registro de Notas</h1>
+        <p>Por favor, complete los campos para registrar las notas:</p>
+        <form id="notasInscribeForm">
+            <label for="cod_e">Código del Estudiante:</label>
+            <input type="number" id="cod_e" name="cod_e" required>
+            
+            <label for="cod_a">Código de la Asignatura:</label>
+            <input type="number" id="cod_a" name="cod_a" required>
+            
+            <label for="id_p">ID del Profesor:</label>
+            <input type="number" id="id_p" name="id_p" required>
+            
+            <label for="grupo">Grupo:</label>
+            <input type="number" id="grupo" name="grupo" required>
+            
+            <label for="n1">Nota 1:</label>
+            <input type="number" id="n1" name="n1" step="0.01" min="0" max="5" required>
+            
+            <label for="n2">Nota 2:</label>
+            <input type="number" id="n2" name="n2" step="0.01" min="0" max="5" required>
+            
+            <label for="n3">Nota 3:</label>
+            <input type="number" id="n3" name="n3" step="0.01" min="0" max="5" required>
+            
+            <input type="submit" value="Registrar Notas">
         </form>
-        <a href="index.html" class="back">Volver al inicio</a>
+        <a href="./index.html" class="back">Volver al inicio</a>
     </div>
 </body>
 

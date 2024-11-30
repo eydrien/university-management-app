@@ -1,25 +1,30 @@
-inscribe.css
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5e8f2;
+    background-color: #f8f9fa;
 }
 
 .container {
-    width: 80%;
-    max-width: 600px;
-    margin: 30px auto;
+    width: 90%;
+    max-width: 700px;
+    margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1rem;
+    color: #666;
     margin-bottom: 20px;
 }
 
@@ -31,8 +36,7 @@ form {
 
 label {
     font-size: 1rem;
-    color: #555;
-    text-align: left;
+    color: #333;
 }
 
 input {
@@ -49,6 +53,7 @@ input[type="submit"] {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1.1rem;
 }
 
 input[type="submit"]:hover {
@@ -59,10 +64,10 @@ input[type="submit"]:hover {
     margin-top: 20px;
     text-decoration: none;
     font-size: 1rem;
-    color: #DAA520;
+    color: #4CAF50;
     display: inline-block;
 }
 
 .back:hover {
-    color: #4CAF50;
+    color: #8A2BE2;
 }
