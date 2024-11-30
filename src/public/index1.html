@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD de Estudiantes</title>
-  <link rel="stylesheet" href="./css/styleEst.css">
+  <link rel="stylesheet" href="./styleEst.css">
+
 </head>
 <body>
     <nav>
@@ -53,48 +54,8 @@
     </table>
   </div>
 
-  <script>
- // Función para obtener los datos de estudiantes desde la API
-// Función para obtener los datos de estudiantes desde la API
-function cargarEstudiantes() {
-  fetch('http://localhost:3000/estudiante') // Asegúrate de que esta URL sea correcta
-  .then(response => response.json())
-  .then(data => {
-    console.log('Datos recibidos:', data);  // Verifica qué datos recibes
 
-    // Verifica si 'data.estudiantes' es un array antes de intentar recorrerlo
-    if (Array.isArray(data.estudiantes)) {
-      const tbody = document.getElementById('tablaBody');
-      tbody.innerHTML = ''; // Limpiar la tabla antes de agregar los nuevos datos
-
-      data.estudiantes.forEach(estudiante => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${estudiante.cod_e}</td>
-            <td>${estudiante.nom_e}</td>
-            <td>${estudiante.dir_e}</td>
-            <td>${estudiante.tel_e}</td>
-            <td>${estudiante.fech_nac}</td>
-            <td>
-                <button onclick="editarEstudiante(${estudiante.cod_e})">Editar</button>
-                <button onclick="eliminarEstudiante(${estudiante.cod_e})">Eliminar</button>
-            </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } else {
-      console.error('La respuesta no tiene un array en la propiedad "estudiantes":', data);
-    }
-  })
-  .catch(error => {
-    console.error('Error al cargar los datos:', error);
-  });
-}
-
-window.onload = cargarEstudiantes;
-
-  </script>
-
+  <script src="./estudiantes.js"></script>
 </body>
 </html>
 
