@@ -13,8 +13,7 @@
           <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
           <li><a href="./profesores.html">Gestion de Profesores</a></li>
         </ul>
-      </nav>
-
+    </nav>
 
   <div class="container">
     <h1>Gestión de Estudiantes</h1>
@@ -37,7 +36,6 @@
       <button type="submit">Guardar</button>
     </form>
 
-    
     <table id="tablaEstudiantes">
       <thead>
         <tr>
@@ -49,51 +47,54 @@
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tablaBody">
        
       </tbody>
     </table>
   </div>
 
+  <script>
+ // Función para obtener los datos de estudiantes desde la API
+// Función para obtener los datos de estudiantes desde la API
+function cargarEstudiantes() {
+  fetch('http://localhost:3000/estudiante') // Asegúrate de que esta URL sea correcta
+  .then(response => response.json())
+  .then(data => {
+    console.log('Datos recibidos:', data);  // Verifica qué datos recibes
 
- <!--  <script>
-    document.getElementById('formEstudiante').addEventListener('submit', function (event) {
-        event.preventDefault();
+    // Verifica si 'data.estudiantes' es un array antes de intentar recorrerlo
+    if (Array.isArray(data.estudiantes)) {
+      const tbody = document.getElementById('tablaBody');
+      tbody.innerHTML = ''; // Limpiar la tabla antes de agregar los nuevos datos
 
-        const estudiante = {
-            cod_e: document.getElementById('cod_e').value,
-            nom_e: document.getElementById('nom_e').value,
-            dir_e: document.getElementById('dir_e').value,
-            tel_e: document.getElementById('tel_e').value,
-            fech_nac: document.getElementById('fech_nac').value
-        };
+      data.estudiantes.forEach(estudiante => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${estudiante.cod_e}</td>
+            <td>${estudiante.nom_e}</td>
+            <td>${estudiante.dir_e}</td>
+            <td>${estudiante.tel_e}</td>
+            <td>${estudiante.fech_nac}</td>
+            <td>
+                <button onclick="editarEstudiante(${estudiante.cod_e})">Editar</button>
+                <button onclick="eliminarEstudiante(${estudiante.cod_e})">Eliminar</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } else {
+      console.error('La respuesta no tiene un array en la propiedad "estudiantes":', data);
+    }
+  })
+  .catch(error => {
+    console.error('Error al cargar los datos:', error);
+  });
+}
 
-        fetch('http://localhost:3000/estudiante', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(estudiante),
-        })
-        .then(response => {
-            if (response.ok) {
-                // Limpiar campos del formulario
-                document.getElementById('cod_e').value = '';
-                document.getElementById('nom_e').value = '';
-                document.getElementById('dir_e').value = '';
-                document.getElementById('tel_e').value = '';
-                document.getElementById('fech_nac').value = '';
+window.onload = cargarEstudiantes;
 
-                // Mostrar mensaje de éxito
-                alert('Estudiante creado con éxito');
-            }
-            return response.json();
-        })
-        .then(data => console.log(data))
-        .catch((error) => console.error('Error:', error));
-    });
-</script> -->
-  <script src="./script/estudiantes.js"></script>
+  </script>
+
 </body>
 </html>
 

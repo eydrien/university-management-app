@@ -1,16 +1,16 @@
-profesores.css
+inscribe.css
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e8f5e9;
+    background-color: #f5e8f2;
 }
 
 .container {
     width: 80%;
     max-width: 600px;
     margin: 30px auto;
-    padding: 30px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -59,7 +59,7 @@ input[type="submit"]:hover {
     margin-top: 20px;
     text-decoration: none;
     font-size: 1rem;
-    color: #8A2BE2;
+    color: #DAA520;
     display: inline-block;
 }
 
