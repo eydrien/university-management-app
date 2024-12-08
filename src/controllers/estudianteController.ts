@@ -54,7 +54,31 @@ export const getAll = (callback: Function) => {
         });
     });
 };
-
+export const getOnly = (cod_e: number, callback: Function) => {
+    const queryString = 'SELECT * FROM estudiantes WHERE cod_e = ?';
+   
+    db.query(queryString, [cod_e], (err, result) => {
+        if (err) { callback(err); }
+       
+        const rows = <RowDataPacket[]>result;
+        const estudiantes: Estudiante[] = [];
+        rows.forEach(row => {
+            const estudiante: Estudiante = {
+                cod_e: row.cod_e,
+                nom_e: row.nom_e,
+                dir_e: row.dir_e,
+                tel_e: row.tel_e,
+                fech_nac: row.fech_nac
+            };
+            estudiantes.push(estudiante);
+        });
+        callback(null, {
+            statusCode: 200,
+            message: 'Estudiante obtenido exitosamente',
+            data: estudiantes
+        });
+    });
+};
 
 //update
 export const update = (estudiante: Estudiante, callback: Function) => {

@@ -27,6 +27,17 @@ estudianteRouter.get('/', async (req: Request, res: Response) => {
     });
 });
 
+estudianteRouter.get('/:cod_e', async (req: Request, res: Response) => {
+    const cod_e = parseInt(req.params.cod_e);
+    estudianteController.getOnly(cod_e,(  err: Error, result: any) => {
+        if (err) {
+            return res.status(500).json({ 'message': err.message });
+        }
+        
+        res.status(result.statusCode).json(result);
+    });
+});
+
 
 //ACTUALIZAR
 estudianteRouter.put('/:cod_e', async (req: Request, res: Response) => {
