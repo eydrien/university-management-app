@@ -1,8 +1,8 @@
-import { Asignatura } from '../models/asignaturaModel';
-import { db } from '../../db';
+import { Asignaturas } from '../models/asignaturasModel';
+import { db } from '../../utils/db';
 import { OkPacket, RowDataPacket } from 'mysql2';
 
-export const create = (asignatura: Asignatura, callback: Function) => {
+export const create = (asignatura: Asignaturas, callback: Function) => {
     const queryString = 'INSERT INTO asignaturas (cod_a, nom_a, int_h, creditos ) VALUES (?, ?, ?, ?)';
  
     db.query(
@@ -25,8 +25,6 @@ export const create = (asignatura: Asignatura, callback: Function) => {
     );
 };
 
-
-
 //read
 export const getAll = (callback: Function) => {
     const queryString = 'SELECT * FROM asignaturas';
@@ -35,9 +33,9 @@ export const getAll = (callback: Function) => {
         if (err) { callback(err); }
        
         const rows = <RowDataPacket[]>result;
-        const asignaturas: Asignatura[] = [];
+        const asignaturas: Asignaturas[] = [];
         rows.forEach(row => {
-            const asignatura: Asignatura = {
+            const asignatura: Asignaturas = {
                 cod_a: row.cod_a,
                 nom_a: row.nom_a,
                 int_h: row.int_h,
@@ -54,10 +52,37 @@ export const getAll = (callback: Function) => {
 };
 
 
+export const getOne = (cod_a: number, callback: Function) => {
+    const queryString = 'SELECT * FROM asignaturas WHERE cod_a = ?';
+
+    db.query(queryString, [cod_a], (err, result) => {
+        if (err) { callback(err); }
+ 
+        const row = (<RowDataPacket[]>result)[0];
+        if (row) {
+            const asignatura: Asignaturas = {
+                cod_a: row.cod_a,
+                nom_a: row.nom_a,
+                int_h: row.int_h,
+                creditos: row.creditos
+            };
+            callback(null, {
+                statusCode: 200,
+                message: 'asignatura obtenido exitosamente',
+                data: asignatura
+            });
+        } else {
+            callback(null, {
+                statusCode: 404,
+                message: 'asignatura no encontrado'
+            });
+        }
+    });
+}
 
 
 //update
-export const update = (asignatura: Asignatura, callback: Function) => {
+export const update = (asignatura: Asignaturas, callback: Function) => {
     const queryString = 'UPDATE asignaturas SET nom_a = ?, int_h = ?, creditos = ? WHERE cod_a = ?';
  
     db.query(
@@ -68,7 +93,7 @@ export const update = (asignatura: Asignatura, callback: Function) => {
  
             callback(null, {
                 statusCode: 200,
-                message: 'Asignatura actualizada exitosamente',
+                message: 'Asignaturas actualizada exitosamente',
                 data: {
                     cod_a: asignatura.cod_a
                 }
@@ -76,8 +101,6 @@ export const update = (asignatura: Asignatura, callback: Function) => {
         }
     );
 };
-
-
 
 //Remove
 export const remove = (cod_a: number, callback: Function) => {
@@ -88,7 +111,7 @@ export const remove = (cod_a: number, callback: Function) => {
  
         callback(null, {
             statusCode: 200,
-            message: 'Asignatura eliminado exitosamente'
+            message: 'Asignaturas eliminado exitosamente'
         });
     });
 };

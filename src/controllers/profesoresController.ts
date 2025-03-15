@@ -1,8 +1,8 @@
-import { Profesor } from '../models/profesorModel';
-import { db } from '../../db';
+import { Profesores } from '../models/profesoresModel';
+import { db } from '../../utils/db';
 import { OkPacket, RowDataPacket } from 'mysql2';
 
-export const create = (profesor: Profesor, callback: Function) => {
+export const create = (profesor: Profesores, callback: Function) => {
     const queryString = 'INSERT INTO profesores (id_p, nom_p, dir_p, tel_p, profesion) VALUES (?, ?, ?, ?, ?)';
  
     db.query(
@@ -16,7 +16,7 @@ export const create = (profesor: Profesor, callback: Function) => {
  
             callback(null, {
                 statusCode: 201,
-                message: 'Profesor creado exitosamente',
+                message: 'Profesores creado exitosamente',
                 data: {
                     id_p: profesor.id_p
                 }
@@ -24,8 +24,6 @@ export const create = (profesor: Profesor, callback: Function) => {
         }
     );
 };
-
-
 
 //read
 export const getAll = (callback: Function) => {
@@ -35,9 +33,9 @@ export const getAll = (callback: Function) => {
         if (err) { callback(err); }
        
         const rows = <RowDataPacket[]>result;
-        const profesores: Profesor[] = [];
+        const profesores: Profesores[] = [];
         rows.forEach(row => {
-            const profesor: Profesor = {
+            const profesor: Profesores = {
                 id_p: row.id_p,
                 nom_p: row.nom_p,
                 dir_p: row.dir_p,
@@ -54,11 +52,37 @@ export const getAll = (callback: Function) => {
     });
 };
 
+export const getOne = (id_p: number, callback: Function) => {
+    const queryString = 'SELECT * FROM profesores WHERE id_p = ?';
 
-
+    db.query(queryString, [id_p], (err, result) => {
+        if (err) { callback(err); }
+ 
+        const row = (<RowDataPacket[]>result)[0];
+        if (row) {
+            const profesor: Profesores = {
+                id_p: row.id_p,
+                nom_p: row.nom_p,
+                dir_p: row.dir_p,
+                tel_p: row.tel_p,
+                profesion: row.profesion
+            };
+            callback(null, {
+                statusCode: 200,
+                message: 'profesor obtenido exitosamente',
+                data: profesor
+            });
+        } else {
+            callback(null, {
+                statusCode: 404,
+                message: 'profesor no encontrado'
+            });
+        }
+    });
+}
 
 //update
-export const update = (profesor: Profesor, callback: Function) => {
+export const update = (profesor: Profesores, callback: Function) => {
     const queryString = 'UPDATE profesores SET nom_p = ?, dir_p = ?, tel_p = ?, profesion = ? WHERE id_p = ?';
  
     db.query(
@@ -77,8 +101,6 @@ export const update = (profesor: Profesor, callback: Function) => {
         }
     );
 };
-
-
 
 //Remove
 export const remove = (id_p: number, callback: Function) => {

@@ -1,5 +1,5 @@
 import { Inscribe } from '../models/inscribeModel';
-import { db } from '../../db';
+import { db } from '../../utils/db';
 import { OkPacket, RowDataPacket } from 'mysql2';
 
 
@@ -17,6 +17,7 @@ export const getAll = (callback: Function) => {
                 cod_a: row.cod_a,
                 id_p: row.id_p,
                 grupo: row.grupo,
+                semestre: row.semestre,
                 n1: row.n1,
                 n2: row.n2,
                 n3: row.n3
@@ -44,6 +45,7 @@ export const getById = (cod_e: number, callback: Function) => {
                 cod_a: row.cod_a,
                 id_p: row.id_p,
                 grupo: row.grupo,
+                semestre: row.semestre,
                 n1: row.n1,
                 n2: row.n2,
                 n3: row.n3

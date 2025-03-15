@@ -28,6 +28,28 @@ imparteRouter.get('/', async (req: Request, res: Response) => {
     });
 });
 
+imparteRouter.get('/profesores/:id_p/asignaturas', async (req: Request, res: Response) => {
+    const id_p = parseInt(req.params.id_p);
+    imparteController.getByIdP(id_p,(err: Error, result: any) => {
+        if (err) {
+            return res.status(500).json({ 'message': err.message });
+        }
+        
+        res.status(result.statusCode).json(result);
+    });
+});
+
+imparteRouter.get('/asignaturas/:cod_a/profesores', async (req: Request, res: Response) => {
+    const cod_a = parseInt(req.params.cod_a);
+    imparteController.getByCodA(cod_a,(err: Error, result: any) => {
+        if (err) {
+            return res.status(500).json({ 'message': err.message });
+        }
+        
+        res.status(result.statusCode).json(result);
+    });
+});
+
 imparteRouter.put('/:cod_a', async (req: Request, res: Response) => {
     const cod_a = parseInt(req.params.cod_a);
    

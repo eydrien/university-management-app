@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
-import * as estudianteController from '../controllers/estudianteController';
-import { Estudiante } from '../models/estudianteModel';
+import * as estudianteController from '../controllers/estudiantesController';
+import { Estudiantes } from '../models/estudiantesModel';
 const estudianteRouter = express.Router();
  //CREACION DE UN ESTUDIANTE
 estudianteRouter.post('/', async (req: Request, res: Response) => {
-    const newEstudiante: Estudiante = req.body;
+    const newEstudiante: Estudiantes = req.body;
     estudianteController.create(newEstudiante, (err: Error, result: any) => {
         if (err) {
             return res.status(500).json({ 'message': err.message });
@@ -29,7 +29,8 @@ estudianteRouter.get('/', async (req: Request, res: Response) => {
 
 estudianteRouter.get('/:cod_e', async (req: Request, res: Response) => {
     const cod_e = parseInt(req.params.cod_e);
-    estudianteController.getOnly(cod_e,(  err: Error, result: any) => {
+
+    estudianteController.getOne(cod_e,(  err: Error, result: any) => {
         if (err) {
             return res.status(500).json({ 'message': err.message });
         }
@@ -43,7 +44,7 @@ estudianteRouter.get('/:cod_e', async (req: Request, res: Response) => {
 estudianteRouter.put('/:cod_e', async (req: Request, res: Response) => {
     const cod_e = parseInt(req.params.cod_e);
    
-    const updatedEstudiante: Estudiante = { ...req.body, cod_e };
+    const updatedEstudiante: Estudiantes = { ...req.body, cod_e };
  
     estudianteController.update(updatedEstudiante, (err: Error, result: any) => {
         if (err) {

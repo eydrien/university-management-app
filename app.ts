@@ -1,37 +1,30 @@
 import * as dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import * as bodyParser from 'body-parser';
-import { estudianteRouter } from './src/routes/estudianteRoutes';
-import{ profesorRouter } from './src/routes/profesorRoutes';
+import { estudianteRouter } from './src/routes/estudiantesRouter';
+import { profesorRouter } from './src/routes/profesorRoutes';
 import { asignaturaRouter } from './src/routes/asignaturasRoutes';
-import { inscribeRouter} from './src/routes/inscribeRoutes';
+import { inscribeRouter } from './src/routes/inscribeRoutes';
 import { imparteRouter } from './src/routes/imparteRoutes';
-import { db } from './db';
+import { db } from './utils/db';
 import cors from 'cors';
 
 const app = express();
 dotenv.config();
 
-
-
 app.use(cors());
 app.use(bodyParser.json());
-app.get('/', ( req, res) => {
-    
+app.get('/', (req, res) => {
     res.type('text/plain');
     res.status(200).send('Welcome!');
 });
 
 //rutas
-app.use('/estudiante', estudianteRouter);
-app.use('/profesor', profesorRouter);
-app.use('/asignatura', asignaturaRouter);
+app.use('/estudiantes', estudianteRouter);
+app.use('/profesores', profesorRouter);
+app.use('/asignaturas', asignaturaRouter);
 app.use('/inscribe', inscribeRouter);
 app.use('/imparte', imparteRouter);
-
-
-
-
 
 db.connect((err) => {
     if (err) {

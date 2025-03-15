@@ -1,4 +1,4 @@
-export  interface Profesor{
+export  interface Profesores{
     id_p:number;
     nom_p:string;
     dir_p:string;
