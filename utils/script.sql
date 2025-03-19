@@ -44,7 +44,7 @@ CREATE TABLE Inscribe (
     cod_a INT,                      -- Código de la asignatura
     id_p INT,                       -- Identificación del profesor
     grupo INT, 			            -- Grupo de estudiantes
-    semestre INT CHECK (semestre>0),              -- Semestre
+    semestre INT,              -- Semestre
     n1 FLOAT(1) check (n1 between 0 and 5) default 0,                       -- Nota 1
     n2 FLOAT(1) check (n2 between 0 and 5) default 0,                       -- Nota 2
     n3 FLOAT(1) check (n3 between 0 and 5) default 0,                       -- Nota 3
