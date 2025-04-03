@@ -84,7 +84,6 @@ imparteRouter.put('/', async (req: Request, res: Response, next: NextFunction): 
     });
 });
 
-
 imparteRouter.delete('/', async (req: Request, res: Response): Promise<void> => {
     // Extraer los parámetros de la query
     const { id_p, cod_a, grupo, semestre } = req.query;

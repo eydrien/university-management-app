@@ -54,242 +54,338 @@ export const getAll = (callback: Function) => {
 }
 
 export const getById = (cod_e: number, callback: Function) => {
-    const queryString = `SELECT inscribe.*, estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+
+    const checkQuery = `
+    SELECT COUNT(*) AS count FROM inscribe 
+    WHERE cod_e= ? `;
+
+    db.query(checkQuery, [cod_e], (err, result) => {
+        if (err) {
+            return callback(err);
+        }
+
+        if (Array.isArray(result) && result.length > 0 && (result as any[])[0].count === 0) {
+
+            return callback(null, {
+                statusCode: 400,
+                message: 'No existe registro en inscribe',
+
+            });
+        }
+        const queryString = `SELECT inscribe.*, estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
     FROM inscribe
     JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
     JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
     WHERE inscribe.cod_e = ?;`
-    db.query(queryString, [cod_e], (err, result) => {
-        if (err) {
-            callback(err);
-        }
 
-        const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
+        db.query(queryString, [cod_e], (err, result) => {
+            if (err) {
+                callback(err);
+            }
 
-        if (rows) {
-            rows.forEach(row => {
-                const inscribe: Inscribe = {
-                    cod_e: row.cod_e,
-                    cod_a: row.cod_a,
-                    id_p: row.id_p,
-                    grupo: row.grupo,
-                    semestre: row.semestre,
-                    n1: row.n1,
-                    n2: row.n2,
-                    n3: row.n3
-                };
-                inscripciones.push(inscribe);
-            });
-            const responseData = inscripciones.map((item, index) => ({
-                ...item,
-                nombre_estudiante: rows[index].nombre_estudiante,
-                nombre_asignatura: rows[index].nombre_asignatura
-            }));
+            const rows = <RowDataPacket[]>result;
+            const inscripciones: Inscribe[] = [];
 
-            callback(null, {
-                statusCode: 200,
-                message: 'Inscribe obtenido exitosamente',
-                data: responseData
-            });
+            if (rows) {
+                rows.forEach(row => {
+                    const inscribe: Inscribe = {
+                        cod_e: row.cod_e,
+                        cod_a: row.cod_a,
+                        id_p: row.id_p,
+                        grupo: row.grupo,
+                        semestre: row.semestre,
+                        n1: row.n1,
+                        n2: row.n2,
+                        n3: row.n3
+                    };
+                    inscripciones.push(inscribe);
+                });
+                const responseData = inscripciones.map((item, index) => ({
+                    ...item,
+                    nombre_estudiante: rows[index].nombre_estudiante,
+                    nombre_asignatura: rows[index].nombre_asignatura
+                }));
 
-        } else {
-            callback(null, {
-                statusCode: 404,
-                message: 'No se encontró inscribe con los parámetros proporcionados'
-            });
-        }
+                callback(null, {
+                    statusCode: 200,
+                    message: 'Inscribe obtenido exitosamente',
+                    data: responseData
+                });
+
+            } else {
+                callback(null, {
+                    statusCode: 404,
+                    message: 'No se encontró inscribe con los parámetros proporcionados'
+                });
+            }
+        });
     });
 }
 
 export const getOneAsignatura = (cod_e: number, cod_a: number, grupo: number, callback: Function) => {
-    const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
-    FROM inscribe 
-    JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
-    JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
-    WHERE inscribe.cod_e = ? AND inscribe.cod_a = ? AND inscribe.grupo = ?`;
 
-    db.query(queryString, [cod_e, cod_a, grupo], (err, result) => {
+    const checkQuery = `
+    SELECT COUNT(*) AS count FROM inscribe 
+    WHERE cod_e= ? AND cod_a = ? AND grupo = ?`;
+
+    db.query(checkQuery, [cod_e, cod_a, grupo,], (err, result) => {
         if (err) {
             return callback(err);
         }
-        const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
-        if (rows) {
-            rows.forEach(row => {
-            const inscribe: Inscribe = {
-                cod_e: row.cod_e,
-                cod_a: row.cod_a,
-                id_p: row.id_p,
-                grupo: row.grupo,
-                semestre: row.semestre,
-                n1: row.n1,
-                n2: row.n2,
-                n3: row.n3
-            };
-            inscripciones.push(inscribe);
-            });
-            const responseData = inscripciones.map((item, index) => ({
-                ...item,
-                nombre_estudiante: rows[index].nombre_estudiante,
-                nombre_asignatura: rows[index].nombre_asignatura
-            }));
-            callback(null, {
-                statusCode: 200,
-                message: 'Inscribe obtenido exitosamente',
-                data: responseData
-            });
-        } else {
-            callback(null, {
-                statusCode: 404,
-                message: 'No se encontró inscribe con los parámetros proporcionados'
+
+        if (Array.isArray(result) && result.length > 0 && (result as any[])[0].count === 0) {
+
+            return callback(null, {
+                statusCode: 400,
+                message: 'No existe registro en inscribe',
+
             });
         }
+        const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+        FROM inscribe 
+        JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
+        JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
+        WHERE inscribe.cod_e = ? AND inscribe.cod_a = ? AND inscribe.grupo = ?`;
+
+        db.query(queryString, [cod_e, cod_a, grupo], (err, result) => {
+            if (err) {
+                return callback(err);
+            }
+            const rows = <RowDataPacket[]>result;
+            const inscripciones: Inscribe[] = [];
+            if (rows) {
+                rows.forEach(row => {
+                    const inscribe: Inscribe = {
+                        cod_e: row.cod_e,
+                        cod_a: row.cod_a,
+                        id_p: row.id_p,
+                        grupo: row.grupo,
+                        semestre: row.semestre,
+                        n1: row.n1,
+                        n2: row.n2,
+                        n3: row.n3
+                    };
+                    inscripciones.push(inscribe);
+                });
+                const responseData = inscripciones.map((item, index) => ({
+                    ...item,
+                    nombre_estudiante: rows[index].nombre_estudiante,
+                    nombre_asignatura: rows[index].nombre_asignatura
+                }));
+                callback(null, {
+                    statusCode: 200,
+                    message: 'Inscribe obtenido exitosamente',
+                    data: responseData
+                });
+            } else {
+                callback(null, {
+                    statusCode: 404,
+                    message: 'No se encontró inscribe con los parámetros proporcionados'
+                });
+            }
+        });
     });
 };
 
 export const getBySemestre = (cod_e: number, semestre: number, callback: Function) => {
-    const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
-    FROM inscribe 
-    JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
-    JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
-    WHERE inscribe.cod_e = ? AND inscribe.semestre = ?`;
+    const checkQuery = `
+    SELECT COUNT(*) AS count FROM inscribe 
+    WHERE cod_e= ? AND semestre = ?`;
 
-    db.query(queryString, [cod_e, semestre], (err, result) => {
+    db.query(checkQuery, [cod_e, semestre], (err, result) => {
         if (err) {
             return callback(err);
         }
-        const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
-        if (rows) {
-            rows.forEach(row => {
-                const inscribe: Inscribe = {
-                    cod_e: row.cod_e,
-                    cod_a: row.cod_a,
-                    id_p: row.id_p,
-                    grupo: row.grupo,
-                    semestre: row.semestre,
-                    n1: row.n1,
-                    n2: row.n2,
-                    n3: row.n3
-                };
-                inscripciones.push(inscribe);
-            });
 
-            const responseData = inscripciones.map((item, index) => ({
-                ...item,
-                nombre_estudiante: rows[index].nombre_estudiante,
-                nombre_asignatura: rows[index].nombre_asignatura
-            }));
+        if (Array.isArray(result) && result.length > 0 && (result as any[])[0].count === 0) {
 
-            callback(null, {
-                statusCode: 200,
-                message: 'Inscribe obtenido exitosamente',
-                data: responseData
-            });
+            return callback(null, {
+                statusCode: 400,
+                message: 'No existe registro en inscribe',
 
-        } else {
-            callback(null, {
-                statusCode: 404,
-                message: 'No se encontró inscribe con los parámetros proporcionados'
             });
         }
+        const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+        FROM inscribe 
+        JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
+        JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
+        WHERE inscribe.cod_e = ? AND inscribe.semestre = ?`;
+
+
+        db.query(queryString, [cod_e, semestre], (err, result) => {
+            if (err) {
+                return callback(err);
+            }
+            const rows = <RowDataPacket[]>result;
+            const inscripciones: Inscribe[] = [];
+            if (rows) {
+                rows.forEach(row => {
+                    const inscribe: Inscribe = {
+                        cod_e: row.cod_e,
+                        cod_a: row.cod_a,
+                        id_p: row.id_p,
+                        grupo: row.grupo,
+                        semestre: row.semestre,
+                        n1: row.n1,
+                        n2: row.n2,
+                        n3: row.n3
+                    };
+                    inscripciones.push(inscribe);
+                });
+
+                const responseData = inscripciones.map((item, index) => ({
+                    ...item,
+                    nombre_estudiante: rows[index].nombre_estudiante,
+                    nombre_asignatura: rows[index].nombre_asignatura
+                }));
+
+                callback(null, {
+                    statusCode: 200,
+                    message: 'Inscribe obtenido exitosamente',
+                    data: responseData
+                });
+
+            } else {
+                callback(null, {
+                    statusCode: 404,
+                    message: 'No se encontró inscribe con los parámetros proporcionados'
+                });
+            }
+        });
     });
 }
 
 export const getByAsignatura = (cod_a: number, grupo: number, callback: Function) => {
-    const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+    const checkQuery = `
+    SELECT COUNT(*) AS count FROM inscribe 
+    WHERE cod_a = ? AND grupo = ?`;
+
+    db.query(checkQuery, [cod_a, grupo], (err, result) => {
+        if (err) {
+            return callback(err);
+        }
+
+        if (Array.isArray(result) && result.length > 0 && (result as any[])[0].count === 0) {
+
+            return callback(null, {
+                statusCode: 400,
+                message: 'No existe registro en inscribe',
+
+            });
+        }
+
+        const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
     FROM inscribe 
     JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
     JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
     WHERE inscribe.cod_a = ? AND inscribe.grupo = ?`;
 
-    db.query(queryString, [cod_a, grupo], (err, result) => {
-        if (err) {
-            return callback(err);
-        }
-        const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
-        if (rows) {
-            rows.forEach(row => {
-                const inscribe: Inscribe = {
-                    cod_e: row.cod_e,
-                    cod_a: row.cod_a,
-                    id_p: row.id_p,
-                    grupo: row.grupo,
-                    semestre: row.semestre,
-                    n1: row.n1,
-                    n2: row.n2,
-                    n3: row.n3
-                };
-                inscripciones.push(inscribe);
-            });
-            const responseData = inscripciones.map((item, index) => ({
-                ...item,
-                nombre_estudiante: rows[index].nombre_estudiante,
-                nombre_asignatura: rows[index].nombre_asignatura
-            }));
+        db.query(queryString, [cod_a, grupo], (err, result) => {
+            if (err) {
+                return callback(err);
+            }
+            const rows = <RowDataPacket[]>result;
+            const inscripciones: Inscribe[] = [];
+            if (rows) {
+                rows.forEach(row => {
+                    const inscribe: Inscribe = {
+                        cod_e: row.cod_e,
+                        cod_a: row.cod_a,
+                        id_p: row.id_p,
+                        grupo: row.grupo,
+                        semestre: row.semestre,
+                        n1: row.n1,
+                        n2: row.n2,
+                        n3: row.n3
+                    };
+                    inscripciones.push(inscribe);
+                });
+                const responseData = inscripciones.map((item, index) => ({
+                    ...item,
+                    nombre_estudiante: rows[index].nombre_estudiante,
+                    nombre_asignatura: rows[index].nombre_asignatura
+                }));
 
-            callback(null, {
-                statusCode: 200,
-                message: 'Inscribe obtenido exitosamente',
-                data: responseData
-            });
+                callback(null, {
+                    statusCode: 200,
+                    message: 'Inscribe obtenido exitosamente',
+                    data: responseData
+                });
 
-        } else {
-            callback(null, {
-                statusCode: 404,
-                message: 'inscribe no encontrados'
-            });
-        }
+            } else {
+                callback(null, {
+                    statusCode: 404,
+                    message: 'inscribe no encontrados'
+                });
+            }
+        });
     });
 }
 
 export const getByAsignaturaSemestre = (cod_a: number, grupo: number, semestre: number, callback: Function) => {
-    const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
-    FROM inscribe 
-    JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
-    JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
-    WHERE inscribe.cod_a = ? AND inscribe.grupo = ? AND inscribe.semestre = ?` ;
+    const checkQuery = `
+    SELECT COUNT(*) AS count FROM inscribe 
+    WHERE cod_a = ? AND grupo = ? AND semestre = ?`;
 
-    db.query(queryString, [cod_a, grupo, semestre], (err, result) => {
+    db.query(checkQuery, [cod_a, grupo, semestre], (err, result) => {
         if (err) {
             return callback(err);
         }
-        const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
-        if (rows) {
-            rows.forEach(row => {
-                const inscribe: Inscribe = {
-                    cod_e: row.cod_e,
-                    cod_a: row.cod_a,
-                    id_p: row.id_p,
-                    grupo: row.grupo,
-                    semestre: row.semestre,
-                    n1: row.n1,
-                    n2: row.n2,
-                    n3: row.n3
-                };
-                inscripciones.push(inscribe);
-            });
-            const responseData = inscripciones.map((item, index) => ({
-                ...item,
-                nombre_estudiante: rows[index].nombre_estudiante,
-                nombre_asignatura: rows[index].nombre_asignatura
-            }));
 
-            callback(null, {
-                statusCode: 200,
-                message: 'Inscribe obtenido exitosamente',
-                data: responseData
-            });
+        if (Array.isArray(result) && result.length > 0 && (result as any[])[0].count === 0) {
 
-        } else {
-            callback(null, {
-                statusCode: 404,
-                message: 'inscribe no encontrados'
+            return callback(null, {
+                statusCode: 400,
+                message: 'No existe registro en inscribe',
+
             });
         }
+
+        const queryString = `SELECT inscribe.*,estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+        FROM inscribe 
+        JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
+        JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
+        WHERE inscribe.cod_a = ? AND inscribe.grupo = ? AND inscribe.semestre = ?` ;
+
+        db.query(queryString, [cod_a, grupo, semestre], (err, result) => {
+            if (err) {
+                return callback(err);
+            }
+            const rows = <RowDataPacket[]>result;
+            const inscripciones: Inscribe[] = [];
+            if (rows) {
+                rows.forEach(row => {
+                    const inscribe: Inscribe = {
+                        cod_e: row.cod_e,
+                        cod_a: row.cod_a,
+                        id_p: row.id_p,
+                        grupo: row.grupo,
+                        semestre: row.semestre,
+                        n1: row.n1,
+                        n2: row.n2,
+                        n3: row.n3
+                    };
+                    inscripciones.push(inscribe);
+                });
+                const responseData = inscripciones.map((item, index) => ({
+                    ...item,
+                    nombre_estudiante: rows[index].nombre_estudiante,
+                    nombre_asignatura: rows[index].nombre_asignatura
+                }));
+
+                callback(null, {
+                    statusCode: 200,
+                    message: 'Inscribe obtenido exitosamente',
+                    data: responseData
+                });
+
+            } else {
+                callback(null, {
+                    statusCode: 404,
+                    message: 'inscribe no encontrados'
+                });
+            }
+        });
     });
 }
 
