@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD de Profesores</title>
+  <title>Gestión de Profesores</title>
   <link rel="stylesheet" href="../Styles/profesores.css">
 </head>
 <body>
   <nav>
     <ul>
       <li><a href="../index.html">Inicio</a></li>
-      <li><a href="./estudiantes.html">Gestion de Estudiantes</a></li>
-      <li><a href="./profesores.html">Gestion de Profesores</a></li>
+      <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
+      <li><a href="./profesores.html">Gestión de Profesores</a></li>
     </ul>
   </nav>
 
@@ -23,18 +23,19 @@
       <input type="text" id="id_p" name="id_p" placeholder="ID del profesor" required>
       
       <label for="nom_p">Nombre:</label>
-      <input type="text" id="nom_p" name="nom_p" placeholder="Nombre del profesor" required />
+      <input type="text" id="nom_p" name="nom_p" placeholder="Nombre del profesor" required>
       
       <label for="dir_p">Dirección:</label>
-      <input type="text" id="dir_p" name="dir_p" placeholder="Dirección" required />
+      <input type="text" id="dir_p" name="dir_p" placeholder="Dirección" required>
       
       <label for="tel_p">Teléfono:</label>
-      <input type="text" id="tel_p" name="tel_p" placeholder="Teléfono" required />
+      <input type="text" id="tel_p" name="tel_p" placeholder="Teléfono" required>
 
       <label for="profesion">Profesión:</label>
-      <input type="text" id="profesion" name="profesion" placeholder="Profesión del profesor" required />
+      <input type="text" id="profesion" name="profesion" placeholder="Profesión del profesor" required>
 
       <button type="submit">Guardar</button>
+      <button type="button" id="cancelBtn">Cancelar</button>
     </form>
 
     <table id="tablaProfesores">

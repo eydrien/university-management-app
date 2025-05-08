@@ -1,97 +1,124 @@
-const API_URL = 'http://localhost:3000/profesor';
-
-// Función para obtener estudiantes del servidor
-
-
+const API_URL = 'http://localhost:3000/profesores';
+let modoEdicion = false;
+let profesorEditando = null;
 
 document.getElementById('formProfesor').addEventListener('submit', function (event) {
   event.preventDefault();
 
   const profesor = {
-      id_p: document.getElementById('id_p').value,
-      nom_p: document.getElementById('nom_p').value,
-      dir_p: document.getElementById('dir_p').value,
-      tel_p: document.getElementById('tel_p').value,
-      profesion: document.getElementById('profesion').value
+    id_p: document.getElementById('id_p').value,
+    nom_p: document.getElementById('nom_p').value,
+    dir_p: document.getElementById('dir_p').value,
+    tel_p: document.getElementById('tel_p').value,
+    profesion: document.getElementById('profesion').value
   };
 
-  fetch('http://localhost:3000/profesor', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(profesor),
-  })
-  .then(response => {
-      if (response.ok) {
-          // Limpiar campos del formulario
-          document.getElementById('id_p').value = '';
-          document.getElementById('nom_p').value = '';
-          document.getElementById('dir_p').value = '';
-          document.getElementById('tel_p').value = '';
-          document.getElementById('profesion').value = '';
+  const url = modoEdicion ? `${API_URL}/${profesorEditando}` : API_URL;
+  const metodo = modoEdicion ? 'PUT' : 'POST';
 
-          // Mostrar mensaje de éxito
-          alert('Profesor creado con éxito');
-      }
-      return response.json();
+  fetch(url, {
+    method: metodo,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(profesor),
   })
-  .then(data => console.log(data))
-  .catch((error) => console.error('Error:', error));
+    .then(response => response.json())
+    .then(data => {
+      const tipo = modoEdicion ? 'PUT (actualización)' : 'POST (creación)';
+      console.log(`%c[API ${tipo}] Respuesta del servidor:`, 'color: green; font-weight: bold;', data);
+
+      alert(modoEdicion ? 'Profesor actualizado con éxito' : 'Profesor creado con éxito');
+      document.getElementById('formProfesor').reset();
+      modoEdicion = false;
+      profesorEditando = null;
+      document.querySelector('button[type="submit"]').textContent = 'Guardar';
+      cargarProfesores();
+    })
+    .catch(error => {
+      console.error('%c[ERROR] Falló la solicitud al servidor:', 'color: red; font-weight: bold;', error);
+    });
 });
 
+// Botón de Cancelar
+document.getElementById('cancelBtn').addEventListener('click', function () {
+  document.getElementById('formProfesor').reset();  // Resetea el formulario
+  modoEdicion = false;  // Cambia el modo de edición a "false"
+  profesorEditando = null;  // Limpia la variable que guarda el ID del profesor en edición
+  document.querySelector('button[type="submit"]').textContent = 'Guardar';  // Cambia el texto del botón de "Actualizar" a "Guardar"
+});
 
-
-
-
-
-
+// Función para cargar los profesores
 function cargarProfesores() {
-    fetch('http://localhost:3000/profesor')
-      .then(response => response.json())
-      .then(responseData => {
-        console.log('Datos recibidos:', responseData);
-        const profesores = responseData.data;
+  fetch(API_URL)
+    .then(response => response.json())
+    .then(responseData => {
+      console.log('%c[API GET] Lista de profesores:', 'color: blue; font-weight: bold;', responseData);
+      const profesores = responseData.data;
 
-        if (Array.isArray(profesores)) {
-          const tbody = document.getElementById('tablaBody');
-          tbody.innerHTML = '';
+      const tbody = document.getElementById('tablaBody');
+      tbody.innerHTML = '';
 
-          profesores.forEach(profesor => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${profesor.id_p}</td>
-              <td>${profesor.nom_p}</td>
-              <td>${profesor.dir_p}</td>
-              <td>${profesor.tel_p}</td>
-              <td>${profesor.profesion}</td>
-              <td>
-                <button onclick="editarProfesor(${profesor.id_p})">Editar</button>
-                <button onclick="eliminarProfesor(${profesor.id_p})">Eliminar</button>
-              </td>
-            `;
-            tbody.appendChild(tr);
-          });
-        } else {
-          console.error('La respuesta no contiene un array en la propiedad "data":', profesores);
-        }
-      })
-      .catch(error => {
-        console.error('Error al cargar los datos:', error);
+      profesores.forEach(profesor => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${profesor.id_p}</td>
+          <td>${profesor.nom_p}</td>
+          <td>${profesor.dir_p}</td>
+          <td>${profesor.tel_p}</td>
+          <td>${profesor.profesion}</td>
+          <td>
+            <button onclick="editarProfesor('${profesor.id_p}')">Editar</button>
+            <button onclick="eliminarProfesor('${profesor.id_p}')">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
       });
-  }
-  window.onload = cargarProfesores;
-
-
-
-
-
-
-
-// Función para eliminar un estudiante
-async function eliminarEstudiante(id_p) {
-  await fetch(`${API_URL}/${id_p}`, { method: 'DELETE' });
-
+    })
+    .catch(error => {
+      console.error('%c[ERROR] al cargar los datos:', 'color: red; font-weight: bold;', error);
+    });
 }
 
+// Función para editar profesor
+function editarProfesor(id_p) {
+  fetch(`${API_URL}/${id_p}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log('%c[API GET by ID] Profesor a editar:', 'color: orange; font-weight: bold;', data);
+      const profesor = data.data;
+      document.getElementById('id_p').value = profesor.id_p;
+      document.getElementById('nom_p').value = profesor.nom_p;
+      document.getElementById('dir_p').value = profesor.dir_p;
+      document.getElementById('tel_p').value = profesor.tel_p;
+      document.getElementById('profesion').value = profesor.profesion;
 
+      document.querySelector('button[type="submit"]').textContent = 'Actualizar Profesor';  // Cambia el texto del botón
+      modoEdicion = true;  // Cambia el modo a edición
+      profesorEditando = profesor.id_p;  // Guarda el ID del profesor en edición
+    })
+    .catch(error => {
+      console.error('%c[ERROR] al obtener profesor:', 'color: red; font-weight: bold;', error);
+    });
+}
+
+// Función para eliminar profesor
+function eliminarProfesor(id_p) {
+  if (!confirm(`¿Estás seguro de eliminar al profesor ${id_p}?`)) return;
+
+  fetch(`${API_URL}/${id_p}`, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('%c[API DELETE] Profesor eliminado:', 'color: red; font-weight: bold;', data);
+      alert('Profesor eliminado');
+      cargarProfesores();
+    })
+    .catch(error => {
+      console.error('%c[ERROR] al eliminar profesor:', 'color: red; font-weight: bold;', error);
+    });
+}
+
+// Cargar profesores al iniciar
+window.onload = cargarProfesores;

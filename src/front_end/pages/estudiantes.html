@@ -1,11 +1,9 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD de Estudiantes</title>
   <link rel="stylesheet" href="../Styles/estudiantes.css">
-<!--   <script src="./estudiantes.js"></script> -->
 </head>
 <body>
     <nav>
@@ -34,7 +32,8 @@
       <label for="fech_nac">Fecha de Nacimiento:</label>
       <input type="date" id="fech_nac" required />
 
-      <button type="submit">Guardar</button>
+      <button type="submit" id="submitBtn">Guardar</button>
+      <button type="button" id="cancelBtn">Cancelar</button>
     </form>
 
     <table id="tablaEstudiantes">
@@ -49,7 +48,6 @@
         </tr>
       </thead>
       <tbody id="tablaBody">
-       
       </tbody>
     </table>
   </div>
