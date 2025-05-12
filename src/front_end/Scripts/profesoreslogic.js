@@ -1,7 +1,13 @@
+/* -------------------------------------------------------
+ *  PROFESORES – Lógica de Front-End
+ * -----------------------------------------------------*/
 const API_URL = 'http://localhost:3000/profesores';
 let modoEdicion = false;
 let profesorEditando = null;
 
+/* ------------------
+ *  SUBMIT del FORM
+ * ----------------*/
 document.getElementById('formProfesor').addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -40,7 +46,9 @@ document.getElementById('formProfesor').addEventListener('submit', function (eve
     });
 });
 
-// Botón de Cancelar
+/* -------------
+ *  BOTÓN CANCELAR
+ * ------------ */
 document.getElementById('cancelBtn').addEventListener('click', function () {
   document.getElementById('formProfesor').reset();  // Resetea el formulario
   modoEdicion = false;  // Cambia el modo de edición a "false"
@@ -48,7 +56,9 @@ document.getElementById('cancelBtn').addEventListener('click', function () {
   document.querySelector('button[type="submit"]').textContent = 'Guardar';  // Cambia el texto del botón de "Actualizar" a "Guardar"
 });
 
-// Función para cargar los profesores
+/* ---------------------------
+ *  CARGAR TODAS LOS PROFESORES
+ * -------------------------*/
 function cargarProfesores() {
   fetch(API_URL)
     .then(response => response.json())
@@ -68,8 +78,8 @@ function cargarProfesores() {
           <td>${profesor.tel_p}</td>
           <td>${profesor.profesion}</td>
           <td>
-            <button onclick="editarProfesor('${profesor.id_p}')">Editar</button>
-            <button onclick="eliminarProfesor('${profesor.id_p}')">Eliminar</button>
+            <button onclick="editarProfesor('${profesor.id_p}')">✏️Editar</button>
+            <button onclick="eliminarProfesor('${profesor.id_p}')">🗑️Eliminar</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -80,7 +90,9 @@ function cargarProfesores() {
     });
 }
 
-// Función para editar profesor
+/* -------------------
+ *  EDITAR PROFESOR
+ * -----------------*/
 function editarProfesor(id_p) {
   fetch(`${API_URL}/${id_p}`)
     .then(response => response.json())
@@ -102,7 +114,9 @@ function editarProfesor(id_p) {
     });
 }
 
-// Función para eliminar profesor
+/* --------------------
+ *  ELIMINAR PROFESOR
+ * ------------------*/
 function eliminarProfesor(id_p) {
   if (!confirm(`¿Estás seguro de eliminar al profesor ${id_p}?`)) return;
 
@@ -120,5 +134,7 @@ function eliminarProfesor(id_p) {
     });
 }
 
-// Cargar profesores al iniciar
+/* --------------------------
+ *  CARGAR AL INICIAR LA PÁGINA
+ * ------------------------*/
 window.onload = cargarProfesores;

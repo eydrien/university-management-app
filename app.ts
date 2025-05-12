@@ -6,6 +6,7 @@ import { profesorRouter } from './src/routes/profesorRoutes';
 import { asignaturaRouter } from './src/routes/asignaturasRoutes';
 import { inscribeRouter } from './src/routes/inscribeRoutes';
 import { imparteRouter } from './src/routes/imparteRoutes';
+import { statsRouter } from './src/routes/estadisticasRoutes';
 import { db } from './utils/db';
 import cors from 'cors';
 
@@ -25,6 +26,7 @@ app.use('/profesores', profesorRouter);
 app.use('/asignaturas', asignaturaRouter);
 app.use('/inscribe', inscribeRouter);
 app.use('/imparte', imparteRouter);
+app.use('/stats', statsRouter);
 
 db.connect((err) => {
     if (err) {

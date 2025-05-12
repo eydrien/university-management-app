@@ -1,25 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Universidad AJL</title>
-  <link rel="stylesheet" href="../front_end/Styles/index.css">
-</head>
-<body>
-  <header>
-    <h1>Universidad AJL</h1>
-    <p class="slogan">Creando ingenieros que se las ingenian</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universidad AJL</title>
+    <link rel="stylesheet" href="../front_end/Styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Universidad AJL</h1>
+      <p class="slogan">Creando ingenieros que se las ingenian</p>
+    </header>
 
-  <div class="container">
-    <h2>Bienvenidos a la Gestión Académica</h2>
-    <div class="menu">
-      <ul>
-        <li><a href="./pages/estudiantes.html">Gestión de Estudiantes</a></li>
-        <li><a href="./pages/profesores.html">Gestión de Profesores</a></li>
-      </ul>
-    </div>
-  </div>
-</body>
+    <main class="container">
+      <section class="intro">
+        <h2>Bienvenidos a la Plataforma de Gestión Académica</h2>
+        <p>Selecciona una de las opciones para comenzar a gestionar:</p>
+      </section>
+
+      <section class="dashboard">
+        <div class="card">
+          <i class="fas fa-user-graduate"></i>
+          <h3>Estudiantes</h3>
+          <a href="./pages/estudiantes.html">Ir a Gestión</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>Profesores</h3>
+          <a href="./pages/profesores.html">Ir a Gestión</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-book"></i>
+          <h3>Asignaturas</h3>
+          <a href="./pages/asignaturas.html">Ir a Gestión</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-network-wired"></i>
+          <h3>Imparte</h3>
+          <a href="./pages/imparte.html">Ir a Gestión</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-file-signature"></i>
+          <h3>Inscribe</h3>
+          <a href="./pages/inscribe.html">Ir a Gestión</a>
+        </div>
+      </section>
+
+      <section class="stats">
+        <h3>Resumen General</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <i class="fas fa-users"></i>
+            <p><strong id="totalEstudiantes">--</strong><br />Estudiantes</p>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-chalkboard"></i>
+            <p><strong id="totalProfesores">--</strong><br />Profesores</p>
+          </div>
+          <div class="stat-box">
+            <i class="fas fa-book-open"></i>
+            <p><strong id="totalAsignaturas">--</strong><br />Asignaturas</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Universidad AJL | Desarrollado por Adrian González</p>
+      <p><i class="fas fa-envelope"></i> adriangozalezromero@gmail.com</p>
+    </footer>
+    <script src="./Scripts/estadisticasLogic.js"></script>
+  </body>
 </html>

@@ -1,7 +1,13 @@
+/* -------------------------------------------------------
+ *  ESTUDIANTES – Lógica de Front-End
+ * -----------------------------------------------------*/
 const API_URL = 'http://localhost:3000/estudiantes';
 let modoEdicion = false;
 let estudianteEditando = null;
 
+/* ------------------
+ *  SUBMIT del FORM
+ * ----------------*/
 document.getElementById('formEstudiante').addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -40,7 +46,9 @@ document.getElementById('formEstudiante').addEventListener('submit', function (e
     });
 });
 
-// Botón de Cancelar
+/* -------------
+ *  BOTÓN CANCELAR
+ * ------------ */
 document.getElementById('cancelBtn').addEventListener('click', function () {
   document.getElementById('formEstudiante').reset();  // Resetea el formulario
   modoEdicion = false;  // Cambia el modo de edición a "false"
@@ -48,7 +56,9 @@ document.getElementById('cancelBtn').addEventListener('click', function () {
   document.querySelector('button[type="submit"]').textContent = 'Guardar';  // Cambia el texto del botón de "Actualizar" a "Guardar"
 });
 
-// Función para cargar los estudiantes
+/* ---------------------------
+ *  CARGAR TODOS LOS ESTUDIANTES
+ * -------------------------*/
 function cargarEstudiantes() {
   fetch(API_URL)
     .then(response => response.json())
@@ -68,8 +78,8 @@ function cargarEstudiantes() {
           <td>${estudiante.tel_e}</td>
           <td>${new Date(estudiante.fech_nac).toLocaleDateString()}</td>
           <td>
-            <button onclick="editarEstudiante('${estudiante.cod_e}')">Editar</button>
-            <button onclick="eliminarEstudiante('${estudiante.cod_e}')">Eliminar</button>
+            <button onclick="editarEstudiante('${estudiante.cod_e}')">✏️Editar</button>
+            <button onclick="eliminarEstudiante('${estudiante.cod_e}')">🗑️Eliminar</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -80,7 +90,9 @@ function cargarEstudiantes() {
     });
 }
 
-// Función para editar estudiante
+/* -------------------
+ *  EDITAR Estudiante
+ * -----------------*/
 function editarEstudiante(cod_e) {
   fetch(`${API_URL}/${cod_e}`)
     .then(response => response.json())
@@ -102,7 +114,9 @@ function editarEstudiante(cod_e) {
     });
 }
 
-// Función para eliminar estudiante
+/* --------------------
+ *  ELIMINAR Estudiante
+ * ------------------*/
 function eliminarEstudiante(cod_e) {
   if (!confirm(`¿Estás seguro de eliminar al estudiante ${cod_e}?`)) return;
 
@@ -120,5 +134,7 @@ function eliminarEstudiante(cod_e) {
     });
 }
 
-// Cargar estudiantes al iniciar
+/* --------------------------
+ *  CARGAR AL INICIAR LA PÁGINA
+ * ------------------------*/
 window.onload = cargarEstudiantes;
