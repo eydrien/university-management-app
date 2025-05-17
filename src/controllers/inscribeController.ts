@@ -25,14 +25,21 @@ export const create = (inscribeRouter: Inscribe, callback: Function) => {
 
 //obtener
 export const getAll = (callback: Function) => {
-    const queryString = 'SELECT * FROM inscribe';
+    const queryString = `
+        SELECT inscribe.*, estudiantes.nom_e AS nombre_estudiante, asignaturas.nom_a AS nombre_asignatura
+        FROM inscribe
+        JOIN estudiantes ON inscribe.cod_e = estudiantes.cod_e
+        JOIN asignaturas ON inscribe.cod_a = asignaturas.cod_a
+    `;
+
     db.query(queryString, (err, result) => {
         if (err) {
-            callback(err);
+            return callback(err);
         }
+
         const rows = <RowDataPacket[]>result;
-        const inscripciones: Inscribe[] = [];
-        rows.forEach(row => {
+
+        const inscripciones = rows.map(row => {
             const inscribe: Inscribe = {
                 cod_e: row.cod_e,
                 cod_a: row.cod_a,
@@ -43,15 +50,22 @@ export const getAll = (callback: Function) => {
                 n2: row.n2,
                 n3: row.n3
             };
-            inscripciones.push(inscribe);
+
+            return {
+                ...inscribe,
+                nombre_estudiante: row.nombre_estudiante,
+                nombre_asignatura: row.nombre_asignatura
+            };
         });
+
         callback(null, {
             statusCode: 200,
             message: 'Inscripciones obtenidas exitosamente',
-            data: result
+            data: inscripciones
         });
     });
-}
+};
+
 
 export const getById = (cod_e: number, callback: Function) => {
 

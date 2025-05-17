@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Imparte</title>
+    <link rel="stylesheet" href="../Styles/imparte.css" />
+    <!-- <link rel="stylesheet" href="../Styles/estilosGenerales.css"> -->
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
+        <li><a href="./profesores.html">Gestión de Profesores</a></li>
+        <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
+        <li><a href="./imparte.html">Gestion de Imparte</a></li>
+        <li><a href="./inscribe.html">Gestion de Inscribe</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h1>Gestión de Imparte</h1>
+
+      <form id="form-imparte">
+        <h2>Agregar Imparte</h2>
+        <label
+          >Profesor:
+          <select id="id_p" required></select>
+        </label>
+        <label
+          >Asignatura:
+          <select id="cod_a" required></select>
+        </label>
+        <label
+          >Grupo:
+          <input type="number" id="grupo" required min="0" />
+        </label>
+        <label
+          >Semestre:
+          <input type="number" id="semestre" required min="0" />
+        </label>
+        <label
+          >Horario:
+          <input type="text" id="horario" required />
+        </label>
+        <button type="submit">Crear</button>
+        <button type="button" id="cancelar-edicion" style="display: none">
+          Cancelar
+        </button>
+      </form>
+
+      <h2>Listado de Imparte</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID Profesor</th>
+            <th>Profesor</th>
+            <th>Codigo Asignatura</th>
+            <th>Asignatura</th>
+            <th>Grupo</th>
+            <th>Semestre</th>
+            <th>Horario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="imparte-body"></tbody>
+      </table>
+    </div>
+    <script src="../Scripts/imparteLogic.js"></script>
+  </body>
+</html>

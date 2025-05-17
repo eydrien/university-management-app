@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 2rem;
+}
+
+/* Estilo para el nav */
+nav {
+  background-color: #004080;
+  padding: 1rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Estilo de los enlaces del nav */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #f39c12; /* Color mostaza al pasar el mouse */
+}
+
+.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Ventana Modal */
+#modalInscripcion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+}
+.estudiante,.asignatura,.grupo,.semestre,.profesor,.n1,.n2,.n3{
+  width: 100%;
+  text-align: center;
+}
+#closeModal {
+  float: right;
+  cursor: pointer;
+}
+/* fIN DE LA VENTANA MODAL */
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+form input{
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+table thead {
+  background-color: #0077cc;
+  color: white;
+}
+/* Estilo para los botones de las acciones */
+button {
+  font-size: 1rem;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:nth-child(1) {
+  background-color: #2196f3;
+  color: white;
+}
+
+button:nth-child(2) {
+  background-color: #f44336;
+  color: white;
+}
+

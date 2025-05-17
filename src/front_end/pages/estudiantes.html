@@ -1,58 +1,70 @@
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestion de Estudiantes</title>
-  <link rel="stylesheet" href="../Styles/estilosGenerales.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion de Estudiantes</title>
+    <link rel="stylesheet" href="../Styles/estilosGenerales.css" />
+  </head>
+  <body>
     <nav>
-        <ul>
-          <li><a href="../index.html">Inicio</a></li>
-          <li><a href="./estudiantes.html">Gestion de Estudiantes</a></li>
-          <li><a href="./profesores.html">Gestion de Profesores</a></li>
-          <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
-        </ul>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
+        <li><a href="./profesores.html">Gestión de Profesores</a></li>
+        <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
+        <li><a href="./imparte.html">Gestion de Imparte</a></li>
+        <li><a href="./inscribe.html">Gestion de Inscribe</a></li>
+      </ul>
     </nav>
 
-  <div class="container">
-    <h1>Gestión de Estudiantes</h1>
+    <div class="container">
+      <h1>Gestión de Estudiantes</h1>
 
-    <form id="formEstudiante">
-      <label for="cod_e">Código:</label>
-      <input type="text" id="cod_e" name="cod_e" placeholder="Código del estudiante" required>
-      <label for="nom_e">Nombre:</label>
-      <input type="text" id="nom_e" placeholder="Nombre del estudiante" required />
-      
-      <label for="dir_e">Dirección:</label>
-      <input type="text" id="dir_e" placeholder="Dirección" required />
-      
-      <label for="tel_e">Teléfono:</label>
-      <input type="text" id="tel_e" placeholder="Teléfono" required />
+      <form id="formEstudiante">
+        <label for="cod_e">Código:</label>
+        <input
+          type="text"
+          id="cod_e"
+          name="cod_e"
+          placeholder="Código del estudiante"
+          required
+        />
+        <label for="nom_e">Nombre:</label>
+        <input
+          type="text"
+          id="nom_e"
+          placeholder="Nombre del estudiante"
+          required
+        />
 
-      <label for="fech_nac">Fecha de Nacimiento:</label>
-      <input type="date" id="fech_nac" required />
+        <label for="dir_e">Dirección:</label>
+        <input type="text" id="dir_e" placeholder="Dirección" required />
 
-      <button type="submit" id="submitBtn">Guardar</button>
-      <button type="button" id="cancelBtn">Cancelar</button>
-    </form>
+        <label for="tel_e">Teléfono:</label>
+        <input type="text" id="tel_e" placeholder="Teléfono" required />
 
-    <table id="tablaEstudiantes">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nombre</th>
-          <th>Dirección</th>
-          <th>Teléfono</th>
-          <th>Fecha de Nacimiento</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaBody">
-      </tbody>
-    </table>
-  </div>
+        <label for="fech_nac">Fecha de Nacimiento:</label>
+        <input type="date" id="fech_nac" required />
 
-  <script src="../Scripts/estudiantelogic.js"></script>
-</body>
+        <button type="submit" id="submitBtn">Guardar</button>
+        <button type="button" id="cancelBtn">Cancelar</button>
+      </form>
+
+      <table id="tablaEstudiantes">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaBody"></tbody>
+      </table>
+    </div>
+
+    <script src="../Scripts/estudianteLogic.js"></script>
+  </body>
 </html>

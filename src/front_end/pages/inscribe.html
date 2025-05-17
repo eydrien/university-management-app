@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consulta Inscripciones</title>
+    <link rel="stylesheet" href="../Styles/inscribe.css" />
+    <!--  <link rel="stylesheet" href="../Styles/estilosGenerales.css"> -->
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
+        <li><a href="./profesores.html">Gestión de Profesores</a></li>
+        <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
+        <li><a href="./imparte.html">Gestion de Imparte</a></li>
+        <li><a href="./inscribe.html">Gestion de Inscribe</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <h1>Consultar Inscripciones</h1>
+
+      <form id="filtros">
+        <input type="number" id="cod_e" placeholder="Código Estudiante" min="0" />
+        <input type="number" id="cod_a" placeholder="Código Asignatura" min="0" />
+        <input type="number" id="grupo" placeholder="Grupo"  min="0"/>
+        <input type="text" id="semestre" placeholder="Semestre (ej: 202401)" />
+        <button type="submit">Buscar</button>
+        <button type="button" id="limpiar">Limpiar</button>
+      </form>
+      <!-- Botón para abrir el modal -->
+      <button id="btnCrearInscripcion">Crear Inscripción</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Código Estudiante</th>
+            <th>Nombre Estudiante</th>
+            <th>Código Asignatura</th>
+            <th>Nombre Asignatura</th>
+            <th>Grupo</th>
+            <th>Semestre</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Nota 3</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-inscribe">
+          <!-- Datos cargados dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal de creación de inscripción -->
+    <div id="modalInscripcion" style="display: none">
+      <div class="modal-content">
+        <span id="closeModal">&times;</span>
+        <h2>Crear Inscripción</h2>
+        <form id="formInscripcion">
+          <label for="cod_e">Código de Estudiante:</label>
+          <input class="estudiante" type="text" id="cod_e" name="cod_e" required />
+
+          <label for="cod_a">Asignatura:</label>
+          <select class="asignatura" id="cod_a" name="cod_a" required>
+            <!-- Opciones de asignaturas se llenarán dinámicamente -->
+          </select>
+
+          <label for="semestre">Semestre:</label>
+          <select class="semestre" id="semestre" name="semestre" required>
+            <!-- Opciones de semestres se llenarán dinámicamente -->
+          </select>
+
+          <label for="id_p">Profesor:</label>
+          <select class="profesor" id="id_p" name="id_p" required>
+            <!-- Opciones de profesores se llenarán dinámicamente -->
+          </select>
+
+          <label for="grupo">Grupo:</label>
+          <input class="grupo" type="number" id="grupo" name="grupo"  min="0" required />
+
+          <label for="n1">Nota 1:</label>
+          <input class="n1" type="number" id="n1" name="n1" value="0" disabled />
+
+          <label for="n2">Nota 2:</label>
+          <input class="n2" type="number" id="n2" name="n2" value="0" disabled />
+
+          <label for="n3">Nota 3:</label>
+          <input class="n3" type="number" id="n3" name="n3" value="0" disabled />
+
+          <button type="submit">Crear Inscripción</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../Scripts/inscribeLogic.js"></script>
+  </body>
+</html>

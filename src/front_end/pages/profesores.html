@@ -1,60 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Profesores</title>
-  <link rel="stylesheet" href="../Styles/estilosGenerales.css">
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
-      <li><a href="./profesores.html">Gestión de Profesores</a></li>
-      <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
-    </ul>
-  </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Profesores</title>
+    <link rel="stylesheet" href="../Styles/estilosGenerales.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./estudiantes.html">Gestión de Estudiantes</a></li>
+        <li><a href="./profesores.html">Gestión de Profesores</a></li>
+        <li><a href="./asignaturas.html">Gestion de Asignaturas</a></li>
+        <li><a href="./imparte.html">Gestion de Imparte</a></li>
+        <li><a href="./inscribe.html">Gestion de Inscribe</a></li>
+      </ul>
+    </nav>
 
-  <div class="container">
-    <h1>Gestión de Profesores</h1>
+    <div class="container">
+      <h1>Gestión de Profesores</h1>
 
-    <form id="formProfesor">
-      <label for="id_p">ID:</label>
-      <input type="text" id="id_p" name="id_p" placeholder="ID del profesor" required>
-      
-      <label for="nom_p">Nombre:</label>
-      <input type="text" id="nom_p" name="nom_p" placeholder="Nombre del profesor" required>
-      
-      <label for="dir_p">Dirección:</label>
-      <input type="text" id="dir_p" name="dir_p" placeholder="Dirección" required>
-      
-      <label for="tel_p">Teléfono:</label>
-      <input type="text" id="tel_p" name="tel_p" placeholder="Teléfono" required>
+      <form id="formProfesor">
+        <label for="id_p">ID:</label>
+        <input
+          type="text"
+          id="id_p"
+          name="id_p"
+          placeholder="ID del profesor"
+          required
+        />
 
-      <label for="profesion">Profesión:</label>
-      <input type="text" id="profesion" name="profesion" placeholder="Profesión del profesor" required>
+        <label for="nom_p">Nombre:</label>
+        <input
+          type="text"
+          id="nom_p"
+          name="nom_p"
+          placeholder="Nombre del profesor"
+          required
+        />
 
-      <button type="submit">Guardar</button>
-      <button type="button" id="cancelBtn">Cancelar</button>
-    </form>
+        <label for="dir_p">Dirección:</label>
+        <input
+          type="text"
+          id="dir_p"
+          name="dir_p"
+          placeholder="Dirección"
+          required
+        />
 
-    <table id="tablaProfesores">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Dirección</th>
-          <th>Teléfono</th>
-          <th>Profesión</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaBody">
-      </tbody>
-    </table>
-  </div>
+        <label for="tel_p">Teléfono:</label>
+        <input
+          type="number"
+          min="0"
+          id="tel_p"
+          name="tel_p"
+          placeholder="Teléfono"
+          required
+        />
 
-  <script src="../Scripts/profesoresLogic.js"></script>
-</body>
+        <label for="profesion">Profesión:</label>
+        <input
+          type="text"
+          id="profesion"
+          name="profesion"
+          placeholder="Profesión del profesor"
+          required
+        />
+
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancelBtn">Cancelar</button>
+      </form>
+
+      <table id="tablaProfesores">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Profesión</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaBody"></tbody>
+      </table>
+    </div>
+
+    <script src="../Scripts/profesoresLogic.js"></script>
+  </body>
 </html>
