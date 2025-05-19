@@ -23,6 +23,10 @@ async function cargarSelects() {
     const profesores = await fetch(`${API_URL}/profesores`).then(res => res.json());
     const asignaturas = await fetch(`${API_URL}/asignaturas`).then(res => res.json());
 
+    // Limpiar selects y agregar opción por defecto
+    selectProfesor.innerHTML = '<option value="">-- Seleccione un profesor --</option>';
+    selectAsignatura.innerHTML = '<option value="">-- Seleccione una asignatura --</option>';
+
     profesores.data.forEach(prof => {
       const option = document.createElement('option');
       option.value = prof.id_p;
@@ -43,6 +47,7 @@ async function cargarSelects() {
     console.error('%c[ERROR] al cargar los selects:', 'color: red; font-weight: bold;', error);
   }
 }
+
 
 /* -----------------------------
  *  CARGAR TODOS LOS REGISTROS

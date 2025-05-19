@@ -88,7 +88,7 @@ form input {
 
 form button {
   padding: 12px;
-  background-color: #16a085; /* Verde */
+  background-color: #0077cc; /* Verde */
   color: white;
   font-size: 1.1rem;
   border: none;
@@ -98,7 +98,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #1abc9c; /* Verde claro */
+  background-color:#0077cc; /* Verde claro */
 }
 
 /* Estilo para la tabla */
@@ -116,7 +116,7 @@ table td {
 }
 
 table th {
-  background-color: #07818a;
+  background-color: #0077cc;
   font-weight: bold;
   text-align: center;
 }

@@ -13,7 +13,7 @@ const tablaBody = document.getElementById("tabla-inscribe");
 const codESelect = document.getElementById("crear-cod_e");
 const codASelect = document.getElementById("crear-cod_a");
 const idPSelect = document.getElementById("crear-id_p");
-const grupoInput = document.getElementById("crear-grupo");
+const grupoSelect = document.getElementById("crear-grupo");
 const semestreInput = document.getElementById("crear-semestre");
 const n1Input = document.getElementById("crear-n1");
 const n2Input = document.getElementById("crear-n2");
@@ -24,25 +24,36 @@ let editando = false;
 let inscripcionActual = null;
 
 // ==========================
-// Funciones auxiliares
+// Funciones para los selects
 // ==========================
 async function cargarEstudiantes() {
   const res = await fetch(`${API_URL}/estudiantes`);
   const data = await res.json();
-  codESelect.innerHTML = data.data.map(e => `<option value="${e.cod_e}">${e.nom_e} - ${e.cod_e}</option>`).join("");
+  codESelect.innerHTML = `<option value="" disabled selected>Seleccione un estudiante</option>` +
+    data.data.map(e => `<option value="${e.cod_e}">${e.cod_e} - ${e.nom_e} </option>`).join("");
 }
 
 async function cargarAsignaturas() {
   const res = await fetch(`${API_URL}/asignaturas`);
   const data = await res.json();
-  codASelect.innerHTML = data.data.map(a => `<option value="${a.cod_a}">${a.nom_a} - ${a.cod_a}</option>`).join("");
+  codASelect.innerHTML = `<option value="" disabled selected>Seleccione una asignatura</option>` +
+    data.data.map(a => `<option value="${a.cod_a}">${a.cod_a} - ${a.nom_a}</option>`).join("");
 }
 
 async function cargarProfesores() {
   const res = await fetch(`${API_URL}/profesores`);
   const data = await res.json();
-  idPSelect.innerHTML = data.data.map(p => `<option value="${p.id_p}">${p.nom_p} - ${p.id_p}</option>`).join("");
+  idPSelect.innerHTML = `<option value="" disabled selected>Seleccione un profesor</option>` +
+    data.data.map(p => `<option value="${p.id_p}">${p.id_p} - ${p.nom_p}</option>`).join("");
 }
+
+async function cargarGrupos() {
+  const res = await fetch(`${API_URL}/imparte`);
+  const data = await res.json();
+  grupoSelect.innerHTML = `<option value="" disabled selected>Seleccione un Grupo</option>` +
+    data.data.map(g => `<option value="${g.grupo}">${g.grupo}</option>`).join("");
+}
+
 
 
 // ==========================
@@ -98,7 +109,7 @@ function editar(ins) {
   codESelect.value = ins.cod_e;
   codASelect.value = ins.cod_a;
   idPSelect.value = ins.id_p;
-  grupoInput.value = ins.grupo;
+  grupoSelect.value = ins.grupo;
   semestreInput.value = ins.semestre;
   n1Input.value = ins.n1;
   n2Input.value = ins.n2;
@@ -125,7 +136,7 @@ formInscribe.addEventListener("submit", async (e) => {
     cod_e: parseInt(codESelect.value),
     cod_a: parseInt(codASelect.value),
     id_p: parseInt(idPSelect.value),
-    grupo: parseInt(grupoInput.value),
+    grupo: parseInt(grupoSelect.value),
     semestre: parseInt(semestreInput.value),
     n1: parseFloat(n1Input.value),
     n2: parseFloat(n2Input.value),
@@ -225,11 +236,12 @@ limpiarBtn.addEventListener("click", () => {
 });
 
 // ==========================
-// Inicialización
+// Inicialización 
 // ==========================
 document.addEventListener("DOMContentLoaded", async () => {
   await cargarEstudiantes();
   await cargarAsignaturas();
   await cargarProfesores();
+  await cargarGrupos();
   obtenerTodos();
 });
