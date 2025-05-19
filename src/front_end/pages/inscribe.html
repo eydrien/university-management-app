@@ -43,6 +43,7 @@
       <form id="form-inscribe">
         <select id="crear-cod_e" required></select>
         <select id="crear-cod_a" required></select>
+        <select id="crear-id_p"  required></select>
         <input type="number" id="crear-grupo" placeholder="Grupo" required />
         <input
           type="number"
@@ -50,9 +51,9 @@
           placeholder="Semestre"
           required
         />
-        <input type="number" id="crear-n1" placeholder="Nota 1" required />
-        <input type="number" id="crear-n2" placeholder="Nota 2" required />
-        <input type="number" id="crear-n3" placeholder="Nota 3" required />
+        <input type="number" id="crear-n1" placeholder="Nota 1" required min="0" max="5"/>
+        <input type="number" id="crear-n2" placeholder="Nota 2" required min="0" max="5"/>
+        <input type="number" id="crear-n3" placeholder="Nota 3" required min="0" max="5"/>
         <button type="submit" id="btn-crear-actualizar">Crear</button>
          <button type="button" id="btn-cancelar"">Cancelar</button>
       </form>
